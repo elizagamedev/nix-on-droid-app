@@ -595,6 +595,9 @@ public final class TerminalView extends View {
         final boolean controlDownFromEvent = event.isCtrlPressed();
         final boolean leftAltDownFromEvent = (metaState & KeyEvent.META_ALT_LEFT_ON) != 0;
         final boolean rightAltDownFromEvent = (metaState & KeyEvent.META_ALT_RIGHT_ON) != 0;
+        final boolean useAltGr = mClient.getUseAltGr();
+
+        final boolean altDownFromEvent = useAltGr ? leftAltDownFromEvent : event.isAltPressed();
 
         int keyMod = 0;
         if (controlDownFromEvent) keyMod |= KeyHandler.KEYMOD_CTRL;
@@ -607,11 +610,11 @@ public final class TerminalView extends View {
 
         // Clear Ctrl since we handle that ourselves:
         int bitsToClear = KeyEvent.META_CTRL_MASK;
-        if (rightAltDownFromEvent) {
+        if (rightAltDownFromEvent && useAltGr) {
             // Let right Alt/Alt Gr be used to compose characters.
         } else {
-            // Use left alt to send to terminal (e.g. Left Alt+B to jump back a word), so remove:
-            bitsToClear |= KeyEvent.META_ALT_ON | KeyEvent.META_ALT_LEFT_ON;
+            // Send to terminal (e.g. Left Alt+B to jump back a word), so remove:
+            bitsToClear |= KeyEvent.META_ALT_ON | KeyEvent.META_ALT_LEFT_ON | KeyEvent.META_ALT_RIGHT_ON;
         }
         int effectiveMetaState = event.getMetaState() & ~bitsToClear;
 
@@ -626,7 +629,7 @@ public final class TerminalView extends View {
         if ((result & KeyCharacterMap.COMBINING_ACCENT) != 0) {
             // If entered combining accent previously, write it out:
             if (mCombiningAccent != 0)
-                inputCodePoint(mCombiningAccent, controlDownFromEvent, leftAltDownFromEvent);
+                inputCodePoint(mCombiningAccent, controlDownFromEvent, altDownFromEvent);
             mCombiningAccent = result & KeyCharacterMap.COMBINING_ACCENT_MASK;
         } else {
             if (mCombiningAccent != 0) {
@@ -634,7 +637,7 @@ public final class TerminalView extends View {
                 if (combinedChar > 0) result = combinedChar;
                 mCombiningAccent = 0;
             }
-            inputCodePoint(result, controlDownFromEvent, leftAltDownFromEvent);
+            inputCodePoint(result, controlDownFromEvent, altDownFromEvent);
         }
 
         if (mCombiningAccent != oldCombiningAccent) invalidate();

@@ -1,3 +1,28 @@
+Glass Fork Information
+======================
+
+This is a fork of Nix on Android for Google Glass. Besides just making the
+necessary changes for the app to run properly on Glass, the other changes were
+made:
+
+* The extra keys bar has been removed. It's expected that you have a keyboard of
+  some kind connected to your device.
+* The session list view has been removed. Key commands are the only way to
+  switch between sessions.
+* And, speaking of key commands, the Termux built-in `Ctrl+Alt+<key>` commands
+  have all been moved as not to interfere with TUI apps like Emacs. Instead,
+  these shortcuts can be accessed by pressing `Ctrl+Alt+Escape`, then pressing a
+  single key corresponding to the action. These can be viewed in
+  `TermuxViewClient.java`.
+* Likewise, a new option has been added to `termux.settings` to allow you to
+  choose if right alt should be interpreted as `Alt` or `AltGr`. The default is
+  `Alt`, which differs from vanilla Termux. Many settings that were made
+  obsolete by other changes were removed as well. See `TermuxPreferences.java`.
+* Basically, this shit's optimized to run Emacs on your face.
+
+The original [nix-on-droid-app](https://github.com/t184256/nix-on-droid-app)'s
+readme begins here.
+
 Fork information
 ================
 
@@ -51,4 +76,3 @@ Terminal emulators
 * xterm: The grandfather of terminal emulators. [Source](http://invisible-island.net/datafiles/release/xterm.tar.gz).
 * Connectbot: Android SSH client. [Source](https://github.com/connectbot/connectbot)
 * Android Terminal Emulator: Android terminal app which Termux terminal handling is based on. Inactive. [Source](https://github.com/jackpal/Android-Terminal-Emulator).
-

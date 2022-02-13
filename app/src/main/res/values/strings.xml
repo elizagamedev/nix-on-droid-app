@@ -6,8 +6,6 @@
     <string name="termux_exec_permission_label">Nix:Execute</string>
     <string name="termux_exec_permission_desc">Allows application to execute arbitrary shell commands within Nix (Termux).</string>
     <string name="new_session">New session</string>
-    <string name="new_session_failsafe">Failsafe</string>
-    <string name="toggle_soft_keyboard">Keyboard</string>
     <string name="reset_terminal">Reset</string>
     <string name="style_terminal">Style</string>
     <string name="share_transcript_title">Terminal transcript</string>
@@ -38,11 +36,6 @@
 
     <string name="session_rename_title">Set session name</string>
     <string name="session_rename_positive_button">Set</string>
-    <string name="session_new_named_title">New named session</string>
-    <string name="session_new_named_positive_button">Create</string>
-
-    <string name="styling_not_installed">The Termux:Style add-on is not installed.</string>
-    <string name="styling_install">Install</string>
 
     <string name="notification_action_exit">Exit</string>
     <string name="notification_action_wake_lock">Acquire wakelock</string>
@@ -55,12 +48,4 @@
     <string name="color_prompt">Choose color</string>
     <string name="font_prompt">Choose font</string>
     <string name="writing_failed">Failed to install file:\n\n</string>
-
-    <string name="shortcut_widget_name">All shortcuts</string>
-    <string name="single_shortcut_name">Single shortcut</string>
-    <string name="no_shortcut_scripts">No files in\n$HOME/.shortcuts/</string>
-    <string name="refresh">Refresh</string>
-    <string name="termux">Termux</string>
-    <string name="scripts_reloaded">Termux shortcuts reloaded</string>
-    <string name="bad_token_message">This shortcut has become invalid - remove and add again.</string>
 </resources>
